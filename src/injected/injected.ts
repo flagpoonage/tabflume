@@ -16,6 +16,14 @@ function JSONBatch(v: unknown): unknown {
     return v.map(JSONBatch);
   }
 
+  if (v instanceof AbortSignal) {
+    return {
+      __serialized_type: 'AbortSignal',
+      a: v.aborted,
+      b: v.reason
+    }
+  }
+
   // TODO: Need to serialize like, everything possible haha
   return v;
 }
