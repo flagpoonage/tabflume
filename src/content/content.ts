@@ -1,4 +1,5 @@
 import { extension } from "../common/extension";
+import { createBatchCommsToBackground } from "../common/messages";
 
 const script = document.createElement("script");
 script.src = extension.runtime.getURL("injected.js");
@@ -30,11 +31,17 @@ document.addEventListener("inittabflume", (ev) => {
   state.ready = true;
   state.el = comms_el;
 
-  comms_el.addEventListener("batchcomms", (ev: Event) => {
-    if (!(ev instanceof CustomEvent)) {
+  comms_el.addEventListener("batchcomms", async (ev: Event) => {
+    if (!(ev instanceof CustomEvent) || !Array.isArray(ev.detail)) {
       return;
     }
 
-    console.log("Got batch event through comms", ev.detail);
+    try {
+      await extension.runtime.sendMessage(
+        createBatchCommsToBackground(ev.detail)
+      );
+    } catch (exception) {
+      console.warn("Failed to send comms batch to background", exception);
+    }
   });
 });

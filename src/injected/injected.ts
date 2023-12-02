@@ -1,10 +1,6 @@
-const originals = { ...console };
+import { ConsoleCapture } from "../common/messages";
 
-interface ConsoleCapture {
-  type: "log" | "warn" | "error" | "info" | "debug";
-  arguments: unknown[];
-  time: number;
-}
+const originals = { ...console };
 
 function JSONBatch(v: unknown): unknown {
   if (
