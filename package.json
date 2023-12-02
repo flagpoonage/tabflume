@@ -1,0 +1,44 @@
+{
+  "name": "tabflume",
+  "version": "0.0.1",
+  "description": "Extension to monitor tab stuff",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --watch --project tsconfig.json --preserveWatchOutput",
+    "dev": "npm run make-artifacts && concurrently \"node ./.build/build.js --watch\" \"npm run typecheck\" -n \"build,types\" -c \"blue,red\"",
+    "create-release": "node ./scripts/create-release.mjs",
+    "make-artifacts": "mkdir -p ./.build/ && rm -f ./.build/*.js && node ./scripts/scripts.esbuild.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flagpoonage/tabflume.git"
+  },
+  "keywords": [
+    "extension",
+    "tabs",
+    "monitor",
+    "logs"
+  ],
+  "author": "James Hay",
+  "license": "GNU General Public License v3.0",
+  "bugs": {
+    "url": "https://github.com/flagpoonage/tabflume/issues"
+  },
+  "homepage": "https://github.com/flagpoonage/tabflume#readme",
+  "devDependencies": {
+    "@types/chrome": "^0.0.253",
+    "@types/node": "^20.10.1",
+    "@types/uuid": "^9.0.7",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "chokidar": "^3.5.3",
+    "concurrently": "^8.2.2",
+    "dealwith": "^1.3.15",
+    "esbuild": "^0.19.8",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.2",
+    "uuid": "^9.0.1"
+  }
+}

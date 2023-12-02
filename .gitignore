@@ -128,3 +128,11 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+# Build artifacts
+.build/
+build/
+
+# Dev parameters
+environment/build-params.dev.json
